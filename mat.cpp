@@ -17,7 +17,7 @@ namespace ariel
         {
             throw invalid_argument("Mat size is always positive");
         }
-        char table[rows][cols];
+        char table[rows][cols];//maybe need to use vector instead.
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)

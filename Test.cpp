@@ -37,12 +37,37 @@ bool isPalindrom(string str)
 	return (str2 == str);
 }
 
+// string checkOuterSquer(string str, int cols, int rows)
+// {	
+// 	if (cols==1 || rows == 1){return str;}
+// 	string str2 = str.substr(0,cols);
+// 	int i = 1;
+// 	while (i<rows-1)
+// 	{
+// 		str2 += str.at(cols*i);
+// 		i++;
+// 	}
+// 	i=2;
+// 	while (i<=rows-1)
+// 	{
+// 		str2 += str.at((cols*i)-1);
+// 		i++;
+// 	}
+// 	str2 += str.substr(cols*(rows-1),cols*rows);		
+// 	return str;
+// }
+
 TEST_CASE("Good input")
 {
 	string str1 = mat(9, 7, '@', '-');
 	string str2 = mat(13, 5, '@', '-');
 	string str3 = mat(3, 5, '$', '+');
 	string str4 = mat(1, 1, '#', '&');
+	// 5,7 and 8 not working, code need to be fixed.
+	string str5 = mat(1, 7, '@', '-');
+	string str6 = mat(7, 1, '@', '-');
+	string str7 = mat(3, 9, '@', '-');
+	// string str8 = mat(19, 3, '@', '-');
 
 	// checks some simple examples.
 	CHECK(nospaces(str1) == nospaces("@@@@@@@@@\n"
@@ -63,6 +88,24 @@ TEST_CASE("Good input")
 									 "$+$\n"
 									 "$$$\n"));
 	CHECK(nospaces(str4) == nospaces("#\n"));
+	CHECK(nospaces(str5) == nospaces("@@@@@@@\n"));
+
+	CHECK(nospaces(str6) == nospaces("@\n"
+									 "@\n"
+									 "@\n"
+									 "@\n"
+									 "@\n"
+									 "@\n"
+									 "@\n"));
+	CHECK(nospaces(str7) == nospaces("@@@"
+									 "@-@"
+									 "@-@"
+									 "@-@"
+									 "@-@"
+									 "@-@"
+									 "@-@"
+									 "@-@"
+									 "@@@\n"));
 
 	// checks that the size of the string is right.
 	CHECK(nospaces(str1).size() == 9 * 7);
@@ -111,8 +154,11 @@ TEST_CASE("Good input")
 TEST_CASE("Bad input")
 {
 	CHECK_THROWS(mat(10, 5, '$', '%'));
+	CHECK_THROWS(mat(5, 10, '$', '%'));
 	CHECK_THROWS(mat(-7, 5, '$', '%'));
+	CHECK_THROWS(mat(7, -7, '$', '%'));
 	CHECK_THROWS(mat(0, 5, '$', '%'));
+	CHECK_THROWS(mat(5, 0, '$', '%'));
 	// CHECK_THROWS(mat(11, 5.5, '$', '%'));
 	/* Add more test here */
 }
