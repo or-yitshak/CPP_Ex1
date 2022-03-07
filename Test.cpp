@@ -88,23 +88,23 @@ TEST_CASE("Good input")
 									 "$+$\n"
 									 "$$$\n"));
 	CHECK(nospaces(str4) == nospaces("#\n"));
-	CHECK(nospaces(str5) == nospaces("@@@@@@@\n"));
-
-	CHECK(nospaces(str6) == nospaces("@\n"
+	CHECK(nospaces(str5) == nospaces("@\n"
 									 "@\n"
 									 "@\n"
 									 "@\n"
 									 "@\n"
 									 "@\n"
 									 "@\n"));
-	CHECK(nospaces(str7) == nospaces("@@@"
-									 "@-@"
-									 "@-@"
-									 "@-@"
-									 "@-@"
-									 "@-@"
-									 "@-@"
-									 "@-@"
+
+	CHECK(nospaces(str6) == nospaces("@@@@@@@\n"));
+	CHECK(nospaces(str7) == nospaces("@@@\n"
+									 "@-@\n"
+									 "@-@\n"
+									 "@-@\n"
+									 "@-@\n"
+									 "@-@\n"
+									 "@-@\n"
+									 "@-@\n"
 									 "@@@\n"));
 
 	// checks that the size of the string is right.
@@ -112,6 +112,9 @@ TEST_CASE("Good input")
 	CHECK(nospaces(str2).size() == 13 * 5);
 	CHECK(nospaces(str3).size() == 3 * 5);
 	CHECK(nospaces(str4).size() == 1 * 1);
+	CHECK(nospaces(str5).size() == 1 * 7);
+	CHECK(nospaces(str6).size() == 7 * 1);
+	CHECK(nospaces(str7).size() == 3 * 9);
 
 	// checks the number of rows in the string.
 	char ch = '\n';
@@ -119,6 +122,9 @@ TEST_CASE("Good input")
 	CHECK(count(str2.begin(), str2.end(), ch) == 5);
 	CHECK(count(str3.begin(), str3.end(), ch) == 5);
 	CHECK(count(str4.begin(), str4.end(), ch) == 1);
+	CHECK(count(str5.begin(), str5.end(), ch) == 7);
+	CHECK(count(str6.begin(), str6.end(), ch) == 1);
+	CHECK(count(str7.begin(), str7.end(), ch) == 9);
 
 	// checks that symbol1 appears more times than symbol2.
 	char ch11 = '@';
@@ -134,21 +140,18 @@ TEST_CASE("Good input")
 	char ch42 = '&';
 	CHECK(count(str4.begin(), str4.end(), ch41) >= count(str4.begin(), str4.end(), ch42));
 
+	CHECK(count(str5.begin(), str5.end(), ch11) >= count(str5.begin(), str5.end(), ch12));
+	CHECK(count(str6.begin(), str6.end(), ch11) >= count(str6.begin(), str6.end(), ch12));
+	CHECK(count(str7.begin(), str7.end(), ch11) >= count(str7.begin(), str7.end(), ch12));
+
 	// checks if its a palindrom.
 	CHECK(isPalindrom(nospaces(str1)) == true);
 	CHECK(isPalindrom(nospaces(str2)) == true);
 	CHECK(isPalindrom(nospaces(str3)) == true);
 	CHECK(isPalindrom(nospaces(str4)) == true);
-
-	string str = "@@@@@@@@@\n"
-				 "@-------@\n"
-				 "@-@@@@@-@\n"
-				 "@-@---@-@\n"
-				 "@-@@@@@-@\n"
-				 "@-------@\n"
-				 "@@@@@@@@@";
-
-	/* Add more test here */
+	CHECK(isPalindrom(nospaces(str5)) == true);
+	CHECK(isPalindrom(nospaces(str6)) == true);
+	CHECK(isPalindrom(nospaces(str7)) == true);
 }
 
 TEST_CASE("Bad input")
@@ -159,11 +162,8 @@ TEST_CASE("Bad input")
 	CHECK_THROWS(mat(7, -7, '$', '%'));
 	CHECK_THROWS(mat(0, 5, '$', '%'));
 	CHECK_THROWS(mat(5, 0, '$', '%'));
-	// CHECK_THROWS(mat(11, 5.5, '$', '%'));
-	/* Add more test here */
 }
 
-/* Add more test cases here */
 TEST_CASE("Random input")
 {
 	int cols = rand() % 100;
