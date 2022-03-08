@@ -67,6 +67,7 @@ TEST_CASE("Good input")
 	string str5 = mat(1, 7, '@', '-');
 	string str6 = mat(7, 1, '@', '-');
 	string str7 = mat(3, 9, '@', '-');
+	string str8 = mat(5, 5, '@', '@');
 	// string str8 = mat(19, 3, '@', '-');
 
 	// checks some simple examples.
@@ -106,6 +107,12 @@ TEST_CASE("Good input")
 									 "@-@\n"
 									 "@-@\n"
 									 "@@@\n"));
+	CHECK(nospaces(str8) == nospaces("@@@@@\n"
+									 "@@@@@\n"
+									 "@@@@@\n"
+									 "@@@@@\n"
+									 "@@@@@\n"));
+	
 
 	// checks that the size of the string is right.
 	CHECK(nospaces(str1).size() == 9 * 7);
@@ -115,6 +122,7 @@ TEST_CASE("Good input")
 	CHECK(nospaces(str5).size() == 1 * 7);
 	CHECK(nospaces(str6).size() == 7 * 1);
 	CHECK(nospaces(str7).size() == 3 * 9);
+	CHECK(nospaces(str8).size() == 5 * 5);
 
 	// checks the number of rows in the string.
 	char ch = '\n';
@@ -125,6 +133,7 @@ TEST_CASE("Good input")
 	CHECK(count(str5.begin(), str5.end(), ch) == 7);
 	CHECK(count(str6.begin(), str6.end(), ch) == 1);
 	CHECK(count(str7.begin(), str7.end(), ch) == 9);
+	CHECK(count(str8.begin(), str8.end(), ch) == 5);
 
 	// checks that symbol1 appears more times than symbol2.
 	char ch11 = '@';
@@ -143,6 +152,7 @@ TEST_CASE("Good input")
 	CHECK(count(str5.begin(), str5.end(), ch11) >= count(str5.begin(), str5.end(), ch12));
 	CHECK(count(str6.begin(), str6.end(), ch11) >= count(str6.begin(), str6.end(), ch12));
 	CHECK(count(str7.begin(), str7.end(), ch11) >= count(str7.begin(), str7.end(), ch12));
+	CHECK(count(str8.begin(), str8.end(), ch11) >= count(str8.begin(), str8.end(), ch12));
 
 	// checks if its a palindrom.
 	CHECK(isPalindrom(nospaces(str1)) == true);
@@ -152,6 +162,7 @@ TEST_CASE("Good input")
 	CHECK(isPalindrom(nospaces(str5)) == true);
 	CHECK(isPalindrom(nospaces(str6)) == true);
 	CHECK(isPalindrom(nospaces(str7)) == true);
+	CHECK(isPalindrom(nospaces(str8)) == true);
 }
 
 TEST_CASE("Bad input")
